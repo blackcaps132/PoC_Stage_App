@@ -1,0 +1,36 @@
+{
+  "max_decision_seconds": 60,
+  "max_model_calls": 8,
+  "max_tool_calls": 20,
+  "dependency_timeout_seconds": 0.05,
+  "fresh_event_seconds": 600,
+  "profile_max_age_hours": 48,
+  "push_enabled": true,
+  "push_min_hours_since_goal": 2,
+  "provider": "models",
+  "supported_goals": [
+    "G01",
+    "G02",
+    "G03",
+    "G04",
+    "G05",
+    "G07",
+    "G08",
+    "G09",
+    "G12"
+  ],
+  "model_timeout_seconds": 20,
+  "providers": [
+    {
+      "provider": "groq",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.5-flash-lite"
+    }
+  ],
+  "retry_max_attempts": 5,
+  "retry_initial_seconds": 1,
+  "retry_max_seconds": 8
+}

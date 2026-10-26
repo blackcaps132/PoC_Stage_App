@@ -27,4 +27,4 @@ Earlier documentation still described a local fallback after that behavior had b
 - Keep partial simulation separate from the resumable live database so future outcomes cannot affect resumed decisions.
 - Keep generated text out of eligibility and publication checks, and avoid presenting goal success as proof of causal uplift.
 
-The included sample is an offline test run and is labelled with its completion status. Live provider checks and partial runs are not evidence of a successful full live replay. The code, assumptions and limitations still need to be understood and defended in the technical discussion.
+A later check found that the live stop-on-exhaustion rule had also stopped the offline mock at an injected outage. This was corrected: offline fixture failures record no action and continue, while real provider exhaustion still stops live mode. The included sample was regenerated from the full offline replay. Live provider checks and partial runs are not evidence of a successful full live replay. The code, assumptions and limitations still need to be understood and defended in the technical discussion.

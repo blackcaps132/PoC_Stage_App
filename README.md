@@ -14,7 +14,7 @@ python3 -m venv .venv
 .venv/bin/python -m src replay --config config/replay.json --out runs/offline
 ```
 
-The replay configuration needs no API key and sends nothing to a model service. It reproduces the pack's model faults. Because this implementation stops when the provider is unavailable, the injected outage can produce a **partial run**, with exit status **2**. The simulator still runs on actions already committed, and the reports explain the stop. That is intentional behavior, not a successful full replay.
+The replay configuration needs no API key and sends nothing to a model service. It processes the full supplied stream, including injected model faults. An injected outage records a no-action decision for that trigger and processing continues. It never fabricates a replacement recommendation. Live mode separately stops when its real providers are exhausted.
 
 `sample_run/` contains a generated offline sample with its actual completion status. The original pack is unchanged and is required to rebuild a run.
 

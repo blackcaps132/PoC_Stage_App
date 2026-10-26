@@ -416,6 +416,10 @@ class LifecycleAgent:
                                 self.incident("model_provider", now),
                             )
                         except DependencyFailure as error:
+                            if self.provider.name == "replay":
+                                # Fixture failures exercise abstention, not real API exhaustion.
+                                # Record no action and let the evaluator replay continue.
+                                raise
                             raise ModelsUnavailable(
                                 [{"provider": self.provider.name, "error": str(error)}]
                             ) from None

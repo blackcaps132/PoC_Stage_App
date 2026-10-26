@@ -46,7 +46,7 @@ Transient errors and invalid responses get bounded exponential retries. A bad re
 
 There is no local recommendation fallback in live mode. If neither model returns a valid proposal, the unfinished trigger rolls back and replay stops. Previously committed actions are still simulated. Reports show partial coverage and the actual failure codes rather than calling every failure a free-tier quota problem.
 
-`ReplayProvider` is an explicit, key-free evaluator/test mode. It reproduces the supplied model-fault fixtures, including probes at stale or holdout triggers. It is not part of the live fallback chain.
+`ReplayProvider` is an explicit, key-free evaluator/test mode. It reproduces the supplied model-fault fixtures, including probes at stale or holdout triggers. It is not part of the live fallback chain. Injected provider failures in this mode produce recorded no-action decisions, so the offline replay can finish the full stream. Real provider exhaustion still stops live mode.
 
 ## Independent verification
 

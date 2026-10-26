@@ -1,28 +1,18 @@
-# Partial run report
+# Final sample report
 
-Submission sample generated with `config/replay.json`. The supplied provider-outage fixture stopped replay; these are offline test results, not live-model results. To reproduce with the current code, use a new output directory.
+Generated with `config/replay.json`: a complete offline replay, including injected failures recorded as no-action decisions. These are mock-provider results, not live-model results.
 
-Replay stopped because no configured model could return a valid proposal.
+Completed 2679 unique decisions and 734 actions with the replay provider.
 
-Completed decisions: 1278; decisions with model responses: 455; published actions simulated: 331; remaining arrivals: 1657.
+Goals: {'FAILED': 460, 'SUCCEEDED': 43, 'INCONCLUSIVE': 2}. Simulator policy problems: 0.
 
-Provider failures: `[{"provider": "replay", "error": "model_provider_HTTP_503"}]`.
+Maximum local decision processing: 57.577 ms. Decisions over 60 seconds: 0.
 
-Quota-limited/free-tier runs may stop early. No local recommendations replaced failed model calls. Failed and unprocessed triggers produced no actions.
-
-The supplied simulator still follows its predefined triggered cohort. Impact below measures this partial-serving policy; it is not a full-replay result or a served-only causal estimate.
-
-Completed 1278 unique decisions and 331 actions with the replay provider.
-
-Goals: {'FAILED': 240, 'SUCCEEDED': 26, 'INCONCLUSIVE': 2}. Simulator policy problems: 0.
-
-Maximum local decision processing: 8.135 ms. Decisions over 60 seconds: 0.
-
-Total decision processing: 1.977 seconds. Replay wall time: 31.717 seconds.
+Total decision processing: 5.446 seconds. Replay wall time: 38.259 seconds.
 
 See [kpi_report.md](kpi_report.md) for timings, percentiles and measurement definitions.
 
-Primary assigned-arm playback difference: -0.703 percentage points.
+Primary assigned-arm playback difference: +1.267 percentage points.
 
 See impact_report.md for denominators, intervals and limitations. A positive synthetic result is not a claim of real-world effectiveness.
 
@@ -30,4 +20,4 @@ Replay kept all data local. Push actions are simulator inputs only.
 
 Model-fault probes belong to replay mode. Probe calls are counted and cannot authorize actions.
 
-Operational audit counts: `{"control_applied": 3, "decision_processing": 1278, "duplicate_trigger": 35, "fixture_model_output": 3}`.
+Operational audit counts: `{"control_applied": 4, "decision_processing": 2679, "duplicate_trigger": 90, "fixture_model_failure": 1, "fixture_model_output": 4, "goal_transition": 505}`.

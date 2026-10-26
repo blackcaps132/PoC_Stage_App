@@ -61,12 +61,27 @@ class LifecycleTests(unittest.TestCase):
     def test_model_failure_stops_and_rolls_back_without_action(self):
         from src.provider import ModelsUnavailable
 
-        with patch.object(self.provider, "propose", side_effect=DependencyFailure("HTTP_429")):
+        with patch.object(self.provider, "name", "groq"), patch.object(
+            self.provider, "propose", side_effect=DependencyFailure("HTTP_429")
+        ):
             with self.assertRaises(ModelsUnavailable):
                 self.decision()
         self.assertEqual(self.store.db.execute("SELECT count(*) FROM decisions").fetchone()[0], 0)
         self.assertEqual(self.store.db.execute("SELECT count(*) FROM actions").fetchone()[0], 0)
         self.assertIsNone(self.store.open_goal(self.positive["user_id"]))
+
+    def test_offline_model_outage_records_no_action_and_continues(self):
+        with patch.object(
+            self.provider, "propose", side_effect=DependencyFailure("model_provider_HTTP_503")
+        ):
+            decision = self.decision()
+        self.assertEqual(decision["status"], "NO_ACTION")
+        self.assertIn("model_provider_HTTP_503", decision["reason"])
+        self.assertEqual(self.store.db.execute("SELECT count(*) FROM actions").fetchone()[0], 0)
+        self.assertIsNone(self.store.open_goal(self.positive["user_id"]))
+        # The failure was checkpointable work, not a fabricated recommendation.
+        self.assertEqual(self.store.db.execute("SELECT count(*) FROM decisions").fetchone()[0], 1)
+        self.assertNotIn("model_proposal", decision)
 
     def test_partial_replay_simulates_only_committed_actions(self):
         from src.__main__ import main

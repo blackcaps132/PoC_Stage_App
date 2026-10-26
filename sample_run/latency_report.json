@@ -1,42 +1,33 @@
 {
-  "replay_complete": false,
-  "stop": {
-    "reason": "all_models_unavailable",
-    "trigger_event_id": "df07c579-6db5-4653-b5b8-340b5aec96f9",
-    "attempts": [
-      {
-        "provider": "replay",
-        "error": "model_provider_HTTP_503"
-      }
-    ],
-    "model_calls": 1,
-    "failed_decision_seconds": 0.002386,
-    "message": "Replay stopped. No local recommendation was substituted."
-  },
-  "unique_decisions": 1278,
-  "actions": 331,
+  "replay_complete": true,
+  "stop": null,
+  "unique_decisions": 2679,
+  "actions": 734,
   "decision_ms": {
-    "p50": 0.914,
-    "p95": 4.2,
-    "p99": 4.883,
-    "max": 8.135
+    "p50": 1.267,
+    "p95": 4.76,
+    "p99": 6.765,
+    "max": 57.577
   },
   "over_60_seconds": 0,
   "over_5_minutes": 0,
-  "max_through_persistence_ms": 12.035,
-  "model_calls": 457,
+  "max_through_persistence_ms": 57.995,
+  "model_calls": 1039,
   "max_model_calls": 1,
   "max_tool_calls": 4,
   "reason_counts": {
-    "insufficient_valid_content": 37,
-    "evidence_backed_goal_and_action": 303,
-    "holdout_or_unknown_viewer": 634,
-    "effective_dialect_uncertain": 40,
-    "no_supported_eligible_goal": 35,
-    "independent_verification_rejected": 26,
-    "continue_current_plan": 53,
-    "late_or_clock_skewed_trigger_not_a_live_visit": 149,
-    "model_goal_claim_has_no_eligibility_evidence": 1
+    "insufficient_valid_content": 76,
+    "evidence_backed_goal_and_action": 649,
+    "holdout_or_unknown_viewer": 1325,
+    "effective_dialect_uncertain": 91,
+    "no_supported_eligible_goal": 112,
+    "independent_verification_rejected": 67,
+    "continue_current_plan": 119,
+    "late_or_clock_skewed_trigger_not_a_live_visit": 220,
+    "model_goal_claim_has_no_eligibility_evidence": 1,
+    "safe_abstention: model_provider_HTTP_503": 11,
+    "safe_abstention: malformed_model_output": 1,
+    "safe_abstention: user_data_store_read_timeout": 7
   },
   "timestamp_convention": "published_at = deliver_at + measured decision/verification processing; transaction/persistence time is separately measured",
   "load_scope": "Single-process faster-than-real-time fixture replay; not a production concurrency benchmark."
